@@ -1,3 +1,7 @@
+----------------------------------------------------
+Initial set up variables to control and a map method used to convert them to the same scale as the job information in the JSON file
+-----------------------------------------------------
+
 // we will feed peoples responses into this variable but for now I just declare values
 let outdoorsExtent = 1;
 let handsOnExtent = 1;
