@@ -50,7 +50,7 @@ let roleData = [
   }
 ];
 
-// we will feed peoples responses into this variable but for now I just declare values
+// we will feed peoples responses into these variables but for now I just declare values
 let outdoorsExtent = 3;
 let handsOnExtent = 3;
 let technologyExtent = 3;
@@ -60,32 +60,26 @@ let previousSalary = 10000;
 [outdoorsExtent, handsOnExtent, technologyExtent] = [outdoorsExtent, handsOnExtent, technologyExtent].map(x => x = (x-3)/2 );
 
 
- // compare with each job and see create fit number (lower is better)
+ // compare with each job and see create match score (lower is better min 0 max 6)
 
-let panelInstallFit = 0;
-let heatPumpEngFit = 0;
-let EVCPinstalFit = 0;
-let RFassessorFit = 0;
-let forresterFit = 0;
-let SoilTechFit = 0;
-let waterOpFit = 0;
+
 
 let FitArray = [0, 0, 0, 0, 0, 0, 0];
 
 function fitcalculator(i){
  FitArray[i] = Math.abs(roleData[i].outdoorsExtent - outdoorsExtent) + Math.abs(roleData[i].handsOnExtent - handsOnExtent) + Math.abs(roleData[i].technologyExtent - technologyExtent);
-  panelInstallFit = FitArray[0];
-  heatPumpEngFit = FitArray[1];
-  EVCPinstalFit = FitArray[2];
-  RFassessorFit = FitArray[3];
-  forresterFit = FitArray[4];
-  SoilTechFit = FitArray[5];
-  waterOpFit = FitArray[6];
+
 };
 for (let index = 0; index < 7; index++) {
   fitcalculator(index)
 };
-console.log(FitArray);
-console.log(panelInstallFit);
-console.log(waterOpFit);
+for (let index = 0; index < FitArray.length; index++) {
+    roleData[index].matchscore = FitArray[index];    
+}
 
+//re-order array by how good match score is
+roleData.sort((x, y) => x.matchscore-y.matchscore )
+
+// Create an array that contains only the best 3 jobs by match score
+let BestMatches = roleData.slice(0,3);
+console.log(BestMatches);
